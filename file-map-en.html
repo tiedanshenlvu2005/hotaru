@@ -1,0 +1,95 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ironback Shenlv Codex File Map</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --panel: #ffffff;
+      --text: #17212b;
+      --muted: #5f6b76;
+      --line: #d8e0e6;
+      --blue: #1f6feb;
+      --green: #1d7a57;
+      --gold: #9a6a13;
+      --red: #b33a3a;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+    header { background: linear-gradient(180deg, #fff, #f8fafc); border-bottom: 1px solid var(--line); padding: 26px 24px 18px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    .sub { margin: 0; color: var(--muted); max-width: 900px; }
+    main { width: min(1200px, calc(100% - 28px)); margin: 18px auto 36px; display: grid; gap: 16px; }
+    section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    h2 { margin: 0 0 12px; font-size: 19px; }
+    a, .pill { display: block; width: 100%; border: 1px solid var(--line); border-radius: 7px; padding: 11px 12px; background: #fff; color: var(--text); text-decoration: none; margin-bottom: 10px; }
+    a:hover { border-color: var(--blue); color: var(--blue); }
+    .tag { display: inline-block; margin-right: 8px; font-weight: 700; }
+    .blue { color: var(--blue); } .green { color: var(--green); } .gold { color: var(--gold); } .red { color: var(--red); }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code { background: #eef3f8; padding: 1px 5px; border-radius: 4px; }
+    .full { grid-column: 1 / -1; }
+    @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } header { padding: 22px 18px 16px; } h1 { font-size: 24px; } main { width: calc(100% - 18px); } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ironback Shenlv Codex File Map</h1>
+    <p class="sub">ASCII backup for systems that dislike Chinese filenames. Open this page first when you want a clean, encoding-safe map.</p>
+  </header>
+  <main>
+    <section class="full">
+      <h2>Read First</h2>
+      <a href="铁胆神驴Codex-打开先看.txt"><span class="tag red">1</span>Open first note</a>
+      <a href="AGENTS.md"><span class="tag red">2</span>Workspace rules</a>
+      <a href="Codex每日执行方针.txt"><span class="tag gold">3</span>Daily policy</a>
+      <a href="工作区命名与行为说明书.md"><span class="tag green">4</span>Naming and behavior guide</a>
+      <a href="全局踩坑日志.md"><span class="tag blue">5</span>Global pitfalls log</a>
+    </section>
+
+    <div class="grid">
+      <section>
+        <h2>Main Entry</h2>
+        <a href="铁胆神驴总入口.html"><span class="tag blue">HTML</span>Main entry page</a>
+        <a href="打开铁胆神驴总入口.cmd"><span class="tag green">CMD</span>Desktop launcher</a>
+        <a href="index.html"><span class="tag gold">Alias</span>Root index</a>
+      </section>
+
+      <section>
+        <h2>Tools</h2>
+        <a href="软件/"><span class="tag green">Tools</span>OpenClaw, Figma, dashboards, diagnostics</a>
+        <a href="神驴页面/"><span class="tag blue">Pages</span>Shenlv pages and launcher scripts</a>
+        <a href="业务入口/"><span class="tag gold">Biz</span>Business entry links</a>
+      </section>
+
+      <section>
+        <h2>Study</h2>
+        <a href="学习笔记/"><span class="tag green">Notes</span>AI Agent, Codex, AGENTS, safety notes</a>
+        <a href="N1 学习/"><span class="tag blue">N1</span>JLPT N1 study index</a>
+        <a href="三步工作法.docx"><span class="tag gold">Method</span>Three-step working method</a>
+      </section>
+
+      <section>
+        <h2>Credentials</h2>
+        <a href="授权地址/"><span class="tag red">Keys</span>OpenAI, Google AI Studio, Groq</a>
+        <a href="授权地址/授权地址-打开说明.txt"><span class="tag blue">Guide</span>Credential access guide</a>
+        <a href="授权地址/更换 OpenAI Key.cmd"><span class="tag gold">Rotate</span>OpenAI key switcher</a>
+      </section>
+    </div>
+
+    <section class="full">
+      <h2>Key Files</h2>
+      <div class="grid">
+        <div class="pill"><span class="tag blue">Rules</span><code>AGENTS.md</code>, <code>Codex每日执行方针.txt</code>, <code>工作区命名与行为说明书.md</code></div>
+        <div class="pill"><span class="tag green">Logs</span><code>今日项目总结-铁胆神驴Codex.txt</code>, <code>全局踩坑日志.md</code></div>
+        <div class="pill"><span class="tag gold">Pages</span><code>index.html</code>, <code>铁胆神驴总入口.html</code>, <code>神驴页面/shenlv-codex-page.html</code></div>
+        <div class="pill"><span class="tag red">Scripts</span><code>打开铁胆神驴总入口.cmd</code>, <code>软件/启动 OpenClaw.cmd</code>, <code>神驴页面/启动 OpenClaw.cmd</code></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

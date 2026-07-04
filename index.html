@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>铁胆神驴 Codex 任务启动器</title>
+  <style>
+    :root {
+      --ink: #172026;
+      --muted: #66737d;
+      --line: #d8e0e5;
+      --paper: #f6f8f6;
+      --panel: rgba(255, 255, 255, 0.92);
+      --teal: #147a7e;
+      --teal-dark: #0f666a;
+      --amber: #c8781d;
+      --charcoal: #26323a;
+      --ok: #2c7a52;
+      --warn: #9b5d12;
+      --shadow: 0 18px 42px rgba(20, 31, 38, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+      background: var(--paper);
+      letter-spacing: 0;
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      background: #ecf1ef;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(246, 248, 246, 0.98) 0%, rgba(246, 248, 246, 0.9) 42%, rgba(246, 248, 246, 0.18) 76%),
+        url("shenli-hero.png") center right / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 80px;
+      background: linear-gradient(180deg, rgba(246, 248, 246, 0), var(--paper));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 54px;
+      display: grid;
+      grid-template-columns: minmax(360px, 640px) minmax(340px, 460px);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 26px;
+      color: var(--charcoal);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--charcoal);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 680px;
+      font-size: clamp(42px, 7vw, 80px);
+      line-height: 0.98;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 640px;
+      margin: 24px 0 26px;
+      color: #43505a;
+      font-size: 20px;
+      line-height: 1.62;
+    }
+
+    .safe-note {
+      max-width: 640px;
+      padding: 14px 16px;
+      border-left: 5px solid var(--amber);
+      border-radius: 8px;
+      background: rgba(255, 247, 235, 0.9);
+      color: var(--warn);
+      font-size: 15px;
+      line-height: 1.62;
+    }
+
+    .launcher {
+      background: var(--panel);
+      border: 1px solid rgba(216, 224, 229, 0.95);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: 18px;
+    }
+
+    .chat-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .chat-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: #eaf4f2;
+      color: var(--teal-dark);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 7px 10px;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 116px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px 14px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+      font-size: 16px;
+      line-height: 1.55;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(20, 122, 126, 0.14);
+    }
+
+    .modes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .mode {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      color: var(--charcoal);
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .mode input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .mode:has(input:checked) {
+      border-color: var(--teal);
+      background: #eaf4f2;
+      color: var(--teal-dark);
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      background: var(--teal);
+      color: #fff;
+      min-height: 44px;
+      padding: 0 14px;
+      font-size: 15px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    button:hover { background: var(--teal-dark); }
+
+    .secondary {
+      background: var(--charcoal);
+    }
+
+    .secondary:hover {
+      background: #172026;
+    }
+
+    .output {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      background: #10191f;
+      color: #f5fbf9;
+      font-size: 15px;
+      line-height: 1.68;
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 170px;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 10px;
+      color: var(--ok);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 40px 0 58px;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .card {
+      min-height: 192px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(20, 31, 38, 0.06);
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #fff2df;
+      color: var(--amber);
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .check-item {
+      min-height: 128px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .check-item strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--charcoal);
+      font-size: 16px;
+    }
+
+    .check-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        align-items: flex-start;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(246, 248, 246, 0.98) 0%, rgba(246, 248, 246, 0.94) 58%, rgba(246, 248, 246, 0.46) 100%),
+          url("shenli-hero.png") center bottom / cover no-repeat;
+      }
+
+      .hero-inner {
+        width: min(100% - 28px, 720px);
+        grid-template-columns: 1fr;
+        padding: 28px 0 42px;
+      }
+
+      h1 {
+        font-size: 44px;
+        line-height: 1.04;
+      }
+
+      .lead {
+        font-size: 17px;
+      }
+
+      .modes,
+      .actions,
+      .grid,
+      .check-grid {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        width: min(100% - 28px, 720px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="brand">
+          <div class="mark">驴</div>
+          <div>铁胆神驴 Codex 工作台</div>
+        </div>
+
+        <h1>安全任务启动器</h1>
+        <p class="lead">这里不是直接执行电脑任务的聊天机器人，而是把你的想法整理成一段清楚、安全、适合粘贴到新 Codex 聊天里的任务指令。</p>
+        <div class="safe-note">安全版原则：网页只生成提示词，不读取你的电脑文件，不保存 API Key，不直接操作系统。真正执行任务仍然交给 Codex 聊天窗口。</div>
+      </div>
+
+      <div class="launcher">
+        <div class="chat-head">
+          <h2>神驴任务输入</h2>
+          <div class="badge">Superpowers</div>
+        </div>
+
+        <label for="taskInput">你想让 Codex 做什么？</label>
+        <textarea id="taskInput" placeholder="例如：帮我整理桌面文件，先不要删除，先调研哪些有用，再给我方案。"></textarea>
+
+        <label>选择任务类型</label>
+        <div class="modes">
+          <label class="mode"><input type="radio" name="mode" value="docs" checked>写文档</label>
+          <label class="mode"><input type="radio" name="mode" value="code">改代码</label>
+          <label class="mode"><input type="radio" name="mode" value="files">整理文件</label>
+          <label class="mode"><input type="radio" name="mode" value="sheet">生成表格</label>
+          <label class="mode"><input type="radio" name="mode" value="page">搭建页面</label>
+        </div>
+
+        <div class="actions">
+          <button id="generateBtn" type="button">生成指令</button>
+          <button id="copyBtn" class="secondary" type="button">复制到剪贴板</button>
+        </div>
+
+        <div id="output" class="output">使用 Superpowers 的方式，先调研，再写方案，最后执行。</div>
+        <div id="status" class="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <h2 class="section-title">三步工作法</h2>
+    <div class="grid">
+      <article class="card">
+        <div class="num">1</div>
+        <h3>先调研</h3>
+        <p>先看资料、文件和现状，整理出可用信息、风险和不确定点，不急着动手。</p>
+      </article>
+      <article class="card">
+        <div class="num">2</div>
+        <h3>再写方案</h3>
+        <p>把目标、步骤、边界和验证方式写清楚，和你确认以后再进入执行。</p>
+      </article>
+      <article class="card">
+        <div class="num">3</div>
+        <h3>最后执行</h3>
+        <p>确认方案后再修改文件、生成内容、整理资料或安装工具，并检查结果。</p>
+      </article>
+    </div>
+
+    <h2 class="section-title" style="margin-top: 34px;">完成后检查</h2>
+    <div class="check-grid">
+      <div class="check-item"><strong>文件</strong><span>是否生成到正确位置，文件名是否清楚，入口是否能打开。</span></div>
+      <div class="check-item"><strong>内容</strong><span>标题、结构、重点、格式是否完整，没有明显错漏。</span></div>
+      <div class="check-item"><strong>风险</strong><span>是否涉及删除、覆盖、密钥、隐私或系统设置。</span></div>
+      <div class="check-item"><strong>验证</strong><span>能测试就测试，不能测试就说明原因和剩余风险。</span></div>
+      <div class="check-item"><strong>遗漏</strong><span>最后列出还缺什么、下一步建议做什么。</span></div>
+    </div>
+  </main>
+
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const output = document.getElementById("output");
+    const status = document.getElementById("status");
+    const generateBtn = document.getElementById("generateBtn");
+    const copyBtn = document.getElementById("copyBtn");
+
+    const modeText = {
+      docs: [
+        "这是写文档任务。先调研资料、目标读者、文档用途和已有素材，再拟定目录与写作方案。",
+        "确认后再生成文档；完成后检查标题、结构、遗漏点、错别字和是否适合目标读者。"
+      ],
+      code: [
+        "这是改代码任务。先阅读项目结构、相关文件、运行方式和风险点，再写修改方案。",
+        "确认后再改代码；完成后运行可用的检查或测试，并说明改了哪些文件、结果如何。"
+      ],
+      files: [
+        "这是整理文件任务。先只扫描和分类，不删除、不覆盖、不移动重要文件。",
+        "先给出保留、归档、待确认、可删除的建议；确认后再执行整理，并检查是否遗漏。"
+      ],
+      sheet: [
+        "这是生成表格任务。先确认数据来源、字段、格式、统计口径和最终用途，再设计表格结构。",
+        "确认后再生成表格；完成后检查公式、列名、数据完整性和是否便于阅读。"
+      ],
+      page: [
+        "这是搭建页面任务。先调研需求、素材、页面目的、目标用户和视觉方向，再写设计方案。",
+        "确认后再生成页面；完成后检查布局、文字、图片引用、移动端显示和打开入口。"
+      ]
+    };
+
+    function selectedMode() {
+      return document.querySelector("input[name='mode']:checked").value;
+    }
+
+    function buildPrompt() {
+      const task = taskInput.value.trim() || "请先和我确认具体任务，然后再开始。";
+      const mode = selectedMode();
+      return [
+        "使用 Superpowers 的方式，先调研，再写方案，最后执行。",
+        "",
+        "具体任务：",
+        task,
+        "",
+        "工作要求：",
+        ...modeText[mode],
+        "",
+        "执行前请先告诉我：",
+        "1. 你调研到了什么。",
+        "2. 你准备怎么做。",
+        "3. 有哪些风险和需要我确认的地方。",
+        "",
+        "等我确认后再动手。执行完成后，请检查结果，看有没有遗漏，并用清单告诉我检查结果。"
+      ].join("\n");
+    }
+
+    generateBtn.addEventListener("click", () => {
+      output.textContent = buildPrompt();
+      status.textContent = "已生成。复制后粘贴到新的 Codex 聊天即可。";
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      const text = output.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = "已复制，可以粘贴到新的 Codex 聊天。";
+      } catch {
+        status.textContent = "复制失败，请手动选中黑色区域里的文字复制。";
+      }
+    });
+  </script>
+</body>
+</html>

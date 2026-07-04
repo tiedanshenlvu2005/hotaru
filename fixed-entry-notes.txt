@@ -1,0 +1,6 @@
+﻿Fixed entry points
+
+- shenlu-page-entry.lnk -> C:\Users\tieda\OneDrive\Desktop\神驴页面
+- shenlu-codex-entry.lnk -> C:\Users\tieda\OneDrive\Desktop\铁胆神驴Codex
+
+Use these on the desktop as the stable opening points.

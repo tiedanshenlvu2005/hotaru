@@ -1,0 +1,150 @@
+Codex每日执行方针
+
+这是每天使用 Codex 时的操作方针。先看任务风险，再选择模式。
+
+总原则：
+使用 Superpowers 的方式，先调研，再写方案，最后执行。
+执行完还要检查结果，看有没有遗漏。
+
+1. codex --full-auto
+
+含义：
+让 Codex 尽量自动执行任务。
+
+适合：
+- 已经确认安全的整理任务
+- 本地页面制作
+- 文档整理
+- 生成表格
+- 不涉及删除、付款、发布、账号授权的任务
+
+注意：
+遇到密码、支付、API Key、删除、覆盖、发布，仍然要停下来确认。
+
+推荐口令：
+神驴，使用 codex --full-auto 的思路执行，但遇到高风险动作先停下来问我。
+
+2. codex resume
+
+含义：
+继续上一次没有做完的任务。
+
+适合：
+- 昨天没做完的页面
+- 继续整理文件夹
+- 继续分析软件
+- 继续写文档、表格、教程
+
+推荐口令：
+神驴，使用 codex resume，继续上一次任务。先告诉我上次做到哪里，再继续。
+
+3. codex --sandbox read-only
+
+含义：
+只读模式，先检查和分析，不写入、不修改、不删除。
+
+适合：
+- 检查陌生文件夹
+- 分析软件有没有用
+- 看 FX/MT4/MT5 资料
+- 扫描电脑里哪些文件可能没用
+- 执行前调研风险
+
+推荐口令：
+神驴，使用 codex --sandbox read-only，先检查，不要改任何文件。
+
+4. codex --profile + 名词
+
+含义：
+按不同任务身份或工作风格启动 Codex。
+
+可用名词示例：
+- 文档：写说明、教程、口播稿
+- 代码：改网页、脚本、程序
+- 设计：做页面、Figma、视觉方案
+- 整理：整理桌面、文件夹、资料
+- 学习：日语 N1、语法、刷题
+- 电脑管家：检查软件、权限、启动项
+- 自动化：设置 Automations、定时唤醒、每日监控
+- 长期任务：跟踪多天任务、每天接着做
+- 状态助手：显示后台 Agent 正在做什么、是否完成
+
+推荐口令：
+神驴，使用 codex --profile 整理。先调研，再写方案，最后执行。
+
+5. Automations 按计划自动唤醒
+
+含义：
+让 Codex 按计划醒来，检查长期任务或监控目标。
+
+适合：
+- 每天监控 issue
+- 每天检查某个网页或资料
+- 定期整理学习资料
+- 长期项目每天推进一点
+- 提醒后台 Agent 是否完成
+
+创建自动任务前必须写清楚：
+- 监控什么
+- 多久检查一次，或每天几点检查
+- 检查结果怎么汇报
+- 是否需要联网或账号权限
+- 出现风险时是否暂停并问我
+
+推荐口令：
+神驴，创建 Automations 前先写方案，不要直接创建。告诉我监控目标、时间、汇报方式和风险。
+
+6. 状态指示器和自定义宠物
+
+含义：
+做一个本地页面或浮窗，用来显示任务状态。
+
+可以显示：
+- 后台 Agent 正在做什么
+- 任务是否完成
+- 有没有风险
+- 下次自动唤醒时间
+- 今天的任务清单
+- 自定义宠物形象和提示语
+
+注意：
+普通本地页面最安全。真正常驻屏幕的浮窗需要单独设计，可能需要额外程序支持。
+
+每日推荐顺序：
+1. 先用 codex --sandbox read-only 检查。
+2. 再让 Codex 写方案。
+3. 确认后再用 codex --full-auto 执行低风险任务。
+4. 第二天用 codex resume 接着做。
+
+标准任务模板：
+使用 Superpowers 的方式，先调研，再写方案，最后执行。
+
+具体任务：
+【写文档 / 改代码 / 整理文件 / 生成表格 / 搭建页面 / Automations自动任务 / 长期任务 / 状态指示器】
+
+执行模式：
+【codex --full-auto / codex resume / codex --sandbox read-only / codex --profile + 名词】
+
+Automations：
+【按计划自动唤醒 / 每天监控 issue / 接长期任务 / 后台 Agent 状态汇报】
+
+素材位置：
+【把文件夹、网页、图片或文档位置写在这里】
+
+执行前请先告诉我：
+1. 你调研到了什么。
+2. 准备怎么做。
+3. 有哪些风险。
+
+等我确认后再动手。执行完还要检查结果，看有没有遗漏。
+
+## Local Run Policy
+
+OpenClaw and git do not start on this computer unless the user explicitly asks in the current turn.
+Monitoring is always allowed:
+- inspect process state
+- read logs
+- check ports
+- verify config or session files
+
+If launch is needed, wait for a direct user instruction before starting anything.

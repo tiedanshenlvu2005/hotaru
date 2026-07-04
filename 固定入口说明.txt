@@ -1,0 +1,6 @@
+﻿固定入口
+
+- 神驴页面-桌面入口.lnk -> C:\Users\tieda\OneDrive\Desktop\神驴页面
+- 铁胆神驴Codex-桌面入口.lnk -> C:\Users\tieda\OneDrive\Desktop\铁胆神驴Codex
+
+这两个入口放在桌面上，作为固定打开点。
