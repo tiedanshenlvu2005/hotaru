@@ -20,6 +20,7 @@
 - `C:\Users\tieda\Documents\Codex\2026-06-06\new-chat\outputs\AGENTS.md`
 - `C:\Users\tieda\Documents\Codex\2026-06-06\new-chat\outputs\学习解图笔记-Codex权限与工作区.txt`
 - `2026-07-18-截图摘记.md`
+- `2026-07-18-SpaceX开源分组笔记.md`
 
 ## OpenClaw / git 规则
 
